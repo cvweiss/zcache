@@ -1,0 +1,15 @@
+{
+    "name": "cvweiss/zcache",
+    "description": "Library of classes to simplify caching",
+    "license": "GNU Affero General Public License",
+    "authors": [
+        {
+            "name": "Clinton Weiss",
+            "email": "cvweiss@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+
+    }
+}
