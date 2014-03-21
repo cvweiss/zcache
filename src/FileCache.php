@@ -25,7 +25,7 @@ class FileCache extends AbstractCache
 	 * @param $cacheTime the default cache time (5 minutes)
 	 */
 
-	protected $cacheDir = "/tmp/";
+	protected $cacheDir = "/tmp/zkb/";
 	protected $cacheTime = 300;
 
 	/**
@@ -33,7 +33,8 @@ class FileCache extends AbstractCache
 	 */
 	public function __construct($cd = null)
 	{
-		if(!is_null($cd)) $this->cacheDir = $cd;
+		if (!is_null($cd)) $this->cacheDir = $cd;
+		if (!is_dir($this->cacheDir)) mkdir($this->cacheDir);
 	}
 
 	/**
