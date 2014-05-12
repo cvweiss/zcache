@@ -33,6 +33,11 @@ class FileCache extends AbstractCache
 	 */
 	public function __construct($cd = null)
 	{
+		global $cacheDir;
+		if (isset($cacheDir) && $cd === null) {
+			$cd = $cacheDir;
+		}
+
 		if (!is_null($cd)) $this->cacheDir = $cd;
 		if (!is_dir($this->cacheDir)) mkdir($this->cacheDir);
 	}
