@@ -30,29 +30,34 @@ class Cache
 	 */
 	protected static function getCache()
 	{
-		global $cache, $memcacheServer, $memcachePort, $redisServer;
+		global $cache, $memcacheServer, $memcachePort, $redisServer, $preferredCache;
+		if (!isset($preferredCache)) $preferredCache = "FileCache";
 
 		if ($cache == null)
 		{
-			if(extension_loaded("Memcached") && (!empty($memcacheServer)))
+			if($preferredCache == "Memcached" && extension_loaded("Memcached") && (!empty($memcacheServer)))
 			{
 				$cache = new MemcachedCache();
 			}
-			else if(extension_loaded("Memcache") && (!empty($memcacheServer)))
+			else if($preferredCache == "Memcache" && extension_loaded("Memcache") && (!empty($memcacheServer)))
 			{
 				$cache = new MemcacheCache();
 			}
-			else if(extension_loaded("redis") && !empty($redisServer))
+			else if($preferredCache == "redis" && extension_loaded("redis") && !empty($redisServer))
 			{
 				$cache = new RedisCache();
 			}
-			else if(extension_loaded("apcu") || extension_loaded("apc"))
+			else if($preferredCache == "apcu" && extension_loaded("apcu") || extension_loaded("apc"))
 			{
 				$cache = new ApcCache();
 			}
-			else
+			else if ($preferredCache == "FileCache")
 			{
 				$cache = new FileCache();
+			}
+			else
+			{
+				throw new Exception("$preferredCache not found, options are Memcached, Memcache, redis, apcu, and FileCache");
 			}
 		}
 		return $cache;
