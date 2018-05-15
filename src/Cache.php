@@ -57,7 +57,7 @@ class Cache
 			}
 			else
 			{
-				throw new Exception("$preferredCache not found, options are Memcached, Memcache, redis, apcu, and FileCache");
+				$cache = new NoCache();
 			}
 		}
 		return $cache;
