@@ -20,11 +20,11 @@
  */
 class NoCache
 {
-	public function get($key){ } 
-	public function set($key, $value, $timeout){ } 
-	public function replace($key, $value, $timeout){ } 
-	public function delete($key){ } 
-	public function increment($key, $step, $timeout){ } 
-	public function decrement($key, $step, $timeout){ } 
-	public function flush(){ } 
+	public function get($key){ return false; }
+	public function set($key, $value, $timeout){return false;} 
+	public function replace($key, $value, $timeout){return false;} 
+	public function delete($key){return false; } 
+	public function increment($key, $step, $timeout){return false; } 
+	public function decrement($key, $step, $timeout){return false;} 
+	public function flush(){return true;} 
 }

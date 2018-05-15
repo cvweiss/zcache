@@ -31,7 +31,7 @@ class Cache
 	protected static function getCache()
 	{
 		global $cache, $memcacheServer, $memcachePort, $redisServer, $preferredCache;
-		if (!isset($preferredCache)) $preferredCache = "FileCache";
+		if (!isset($preferredCache)) $preferredCache = "NoCache";
 
 		if ($cache == null)
 		{
@@ -55,9 +55,13 @@ class Cache
 			{
 				$cache = new FileCache();
 			}
-			else
+			else if ($preferredCache == "NoCache")
 			{
 				$cache = new NoCache();
+			}
+			else
+			{
+				throw new IllegalArguementException("Unknown cache; $preferredCache");
 			}
 		}
 		return $cache;
